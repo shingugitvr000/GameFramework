@@ -64,7 +64,7 @@ public class SceneManager : SingletonMonoBehaviour<SceneManager>
     {
         // 페이드용 Canvas 생성
         fadeObject = new GameObject("FadeCanvas");
-        fadeObject.transform.SetParent(transform);
+        //fadeObject.transform.SetParent(transform);
 
         Canvas canvas = fadeObject.AddComponent<Canvas>();
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
@@ -298,20 +298,10 @@ public class SceneManager : SingletonMonoBehaviour<SceneManager>
         currentSceneName = scene.name;
         LoadingProgress = 0f;
 
-        // 이벤트 알림
+        // SceneConfig가 GameState를 처리하도록 이벤트만 발생
         GameEvents.SceneChanged(currentSceneName);
 
         Debug.Log($"씬 로딩 완료: {scene.name}");
-
-        // 게임 상태 변경
-        if (currentSceneName == mainMenuSceneName)
-        {
-            GameManager.Instance?.ChangeGameState(GameState.Menu);
-        }
-        else if (currentSceneName == gameSceneName)
-        {
-            GameManager.Instance?.ChangeGameState(GameState.Playing);
-        }
     }
 
     private void OnSceneUnloaded(Scene scene)
