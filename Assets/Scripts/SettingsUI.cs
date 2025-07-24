@@ -17,10 +17,6 @@ public class SettingsUI : MonoBehaviour
     public TextMeshProUGUI sfxVolumeText;
     public TextMeshProUGUI musicVolumeText;
 
-    [Header("UI Settings")]
-    public Slider uiScaleSlider;
-    public TextMeshProUGUI uiScaleText;
-
     [Header("Graphics Settings")]
     public TMP_Dropdown qualityDropdown;
     public Toggle vsyncToggle;
@@ -93,11 +89,7 @@ public class SettingsUI : MonoBehaviour
             sfxVolumeSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
 
         if (musicVolumeSlider != null)
-            musicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
-
-        // UI 설정
-        if (uiScaleSlider != null)
-            uiScaleSlider.onValueChanged.AddListener(OnUIScaleChanged);
+            musicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChanged);       
 
         // 그래픽 설정
         if (qualityDropdown != null)
@@ -163,14 +155,6 @@ public class SettingsUI : MonoBehaviour
             musicVolumeSlider.value = tempSettings.musicVolume;
             if (musicVolumeText != null)
                 musicVolumeText.text = $"{tempSettings.musicVolume * 100:F0}%";
-        }
-
-        // UI 설정 업데이트
-        if (uiScaleSlider != null)
-        {
-            uiScaleSlider.value = tempSettings.uiScale;
-            if (uiScaleText != null)
-                uiScaleText.text = $"{tempSettings.uiScale * 100:F0}%";
         }
 
         // 그래픽 설정 UI 업데이트
@@ -246,19 +230,7 @@ public class SettingsUI : MonoBehaviour
 
         // 실시간 볼륨 적용
         SettingsManager.Instance.SetMusicVolume(value);
-    }
-
-    private void OnUIScaleChanged(float value)
-    {
-        if (isInitializing) return;
-
-        tempSettings.uiScale = value;
-        if (uiScaleText != null)
-            uiScaleText.text = $"{value * 100:F0}%";
-
-        // 실시간 UI 스케일 적용
-        SettingsManager.Instance.SetUIScale(value);
-    }
+    } 
 
     private void OnQualityChanged(int value)
     {

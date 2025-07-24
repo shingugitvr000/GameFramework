@@ -223,12 +223,6 @@ public class SettingsManager : SingletonMonoBehaviour<SettingsManager>
         ApplyAudioSettings();
     }
 
-    public void SetUIScale(float scale)
-    {
-        currentSettings.uiScale = Mathf.Clamp(scale, 0.5f, 2f);
-        ApplyUISettings();
-    }
-
     public void SetQualityLevel(int qualityLevel)
     {
         currentSettings.qualityLevel = Mathf.Clamp(qualityLevel, 0, QualitySettings.names.Length - 1);
